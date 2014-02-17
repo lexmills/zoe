@@ -7,7 +7,6 @@ $(document).ready(function() {
 
 var song;
 var track = 1;
-var play = $('#play');
 var seek = $('#seek');
 
 function playTrack() {
@@ -17,40 +16,31 @@ function playTrack() {
   $('#player').on('click', '.button', function(e) {
 
     if($(this).attr('id') == 'play') {
-        //play song
-        song.play();
-        //update play button to pause
-        play.replaceWith('<a class="button fa fa-pause" id="pause"></a>');
-        //set song title
-        var trackDiv = 'div[value="Track_' + track + '"]';
-        updateTitle(trackDiv);
+      playSong();
 
-        //set range for song duration
-        seek.attr('max', song.duration);
-        //fix scrubber
-        song.addEventListener('timeupdate',function (){
-          curtime = parseInt(song.currentTime, 10);
-          $("#seek").attr("value", curtime);
-        });
-      }
-      if($(this).attr('id') == 'pause') {
-        song.pause();
+      //set song title
+      updateTitle(track);
 
-        $(this).replaceWith('<a class="button fa fa-play" id="play"></a>');
-      }
-      if($(this).attr('id') == 'next') {
-        song.pause();
+      scrubber(song);
+    }
+    // pause button
+    else if ($(this).attr('id') == 'pause') {
+      song.pause();
+      $(this).replaceWith('<a class="button fa fa-play" id="play"></a>');
+    }
+    //next button
+    else {
+      song.pause();
+      track++;
+      song = new Audio('songs/Track_' + track + '.mp3');
+      //set song title
+      updateTitle(track);
 
-        track++;
-        song = new Audio('songs/Track_' + track + '.mp3');
-        //set song title
-        var trackDiv = 'div[value="Track_' + track + '"]';
-        updateTitle(trackDiv);
+      playSong();
+    }
 
-        song.play();
-        play.replaceWith('<a class="button fa fa-pause" id="pause"></a>');
-      }
     e.preventDefault();
+
   });
 }
 
@@ -65,11 +55,29 @@ function trackSelect() {
 
     song = new Audio('songs/Track_' + track + '.mp3');
     song.play();
-    play.replaceWith('<a class="button fa fa-pause" id="pause"></a>');
+    $('#play').replaceWith('<a class="button fa fa-pause" id="pause"></a>');
   });
 }
 
-function updateTitle(curTitle) {
+function playSong() {
+  //play song
+  song.play();
+  //update button for pause
+  $('#play').replaceWith('<a class="button fa fa-pause" id="pause"></a>');
+}
+
+function updateTitle(track) {
+  var trackDiv = 'div[value="Track_' + track + '"]';
   $('.track.title').attr('style', '');
-  $(curTitle).children('.track.title').css('opacity', 1);
+  $(trackDiv).children('.track.title').css('opacity', 1);
+}
+
+function scrubber(song) {
+  //set range for song duration
+  seek.attr('max', song.duration);
+  //fix scrubber
+  song.addEventListener('timeupdate',function (){
+    curtime = parseInt(song.currentTime, 10);
+    $("#seek").attr("value", curtime);
+  });
 }
