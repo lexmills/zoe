@@ -62,17 +62,23 @@ header {
 #player {
   position: relative;
   background: darkgray;
-  padding: 10px 5px;
   overflow: auto;
-  width: 215px;
+  width: 200px;
   border-radius: 5px;
-  margin: 35px auto 20px; }
+  margin: 35px auto 20px;
+  height: 47px; }
   #player .fa {
     position: absolute;
-    color: #fff; }
+    color: #fff;
+    font-size: 2em;
+    top: 8px; }
     #player .fa#next {
-      left: 25px;
-      top: 11px; }
+      right: 20px; }
+    #player .fa#previous {
+      left: 20px; }
+    #player .fa#play, #player .fa#pause {
+      left: 50%;
+      margin-left: -9px; }
   #player input[type=range] {
     width: 80%;
     float: right; }
@@ -83,7 +89,8 @@ header {
   margin: 0 auto;
   font-size: 3em;
   max-width: 885px;
-  padding: 0 0 20px 0; }
+  padding: 0 0 20px 0;
+  overflow: auto; }
   #tracks-container .track-container {
     float: left;
     width: 220px;
@@ -132,3 +139,15 @@ header {
       display: table-cell;
       vertical-align: middle;
       border-radius: 50%; }
+
+#download {
+  text-align: center;
+  margin: 10px 0 20px; }
+  #download a {
+    color: #ff6138;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: .1em; }
+    #download a:hover {
+      color: #79bd8f; }

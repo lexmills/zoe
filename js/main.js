@@ -29,9 +29,17 @@ function playTrack() {
       $(this).replaceWith('<a class="button fa fa-play" id="play"></a>');
     }
     //next button
-    else {
+    else if ($(this).attr('id') == 'next') {
       song.pause();
       track++;
+      song = new Audio('songs/Track_' + track + '.mp3');
+      //set song title
+      updateTitle(track);
+
+      playSong();
+    } else {
+      song.pause();
+      track--;
       song = new Audio('songs/Track_' + track + '.mp3');
       //set song title
       updateTitle(track);

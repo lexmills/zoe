@@ -71,14 +71,17 @@ header {
 #player {
   position: relative;
   background: darkgray;
-  padding: 10px 5px;
   overflow: auto;
-  width: 215px;
+  width: 200px;
   border-radius: 5px;
   margin: 35px auto 20px;
+  height: 47px;
 
-  .fa { position: absolute; color: #fff;
-    &#next { left: 25px; top: 11px; }
+  .fa { position: absolute; color: #fff; font-size: 2em; top: 8px;
+    &#next { right: 20px; }
+    &#previous { left: 20px; }
+    &#play { left: 50%; margin-left: -9px; }
+    &#pause { @extend #play; }
   }
 
   input[type=range] { width: 80%; float: right; }
@@ -86,7 +89,7 @@ header {
 
 /* Tracks */
 #tracks-container {
-  width: 90%; margin: 0 auto; font-size: 3em; max-width: 885px; padding: 0 0 20px 0;
+  width: 90%; margin: 0 auto; font-size: 3em; max-width: 885px; padding: 0 0 20px 0; overflow: auto;
 
   .track-container { float: left; width: 220px; height: 220px; overflow: hidden; position: relative;
     &:nth-child(3n+1) div { background: $darkGreen; }
@@ -117,3 +120,13 @@ header {
     p { display: table-cell; vertical-align: middle; border-radius: 50%; }
   }
 }
+
+#download {
+  text-align: center;
+  margin: 10px 0 20px;
+  a { color: $orange; font-weight: bold; text-decoration: none; text-transform: uppercase; letter-spacing: .1em;
+
+    &:hover { color: $darkGreen; }
+  }
+}
+
