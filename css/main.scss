@@ -1,0 +1,119 @@
+/* Variables - Phaedra Color Theme */
+$orange : rgb(255,97,56);
+$yellow : rgb(255,255,157);
+$lightGreen : rgb(190,235,159);
+$darkGreen : rgb(121,189,143);
+$blueGreen : rgb(0,163,56);
+
+/* Reset CSS */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+  background: $yellow;
+  font-family: 'Open Sans', sans-serif;
+}
+ol, ul {
+  list-style: none;
+}
+
+/* Header */
+header {
+  height: 80px;
+
+  /* span tag added for absolute positioning */
+  span {
+    position: absolute;
+    left: 50%;
+    margin-left: -353px;
+    top: 20px;
+
+    h1 {
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-size: 4.3em;
+      color: $orange;
+      display: inline;
+      position: relative;
+      opacity: .5;
+      font-weight: bold;
+
+      &:after { content: 'Happy B-Day Zoe!'; color: $blueGreen; position: absolute; left: -3px; top: 6px; opacity: .5; }
+    }
+  }
+}
+
+/* Player */
+#player {
+  position: relative;
+  background: darkgray;
+  padding: 10px 5px;
+  overflow: auto;
+  width: 215px;
+  border-radius: 5px;
+  margin: 35px auto 20px;
+
+  .fa { position: absolute; color: #fff;
+    &#next { left: 25px; top: 11px; }
+  }
+
+  input[type=range] { width: 80%; float: right; }
+}
+
+/* Tracks */
+#tracks-container {
+  width: 90%; margin: 0 auto; font-size: 3em; max-width: 885px; padding: 0 0 20px 0;
+
+  .track-container { float: left; width: 220px; height: 220px; overflow: hidden; position: relative;
+    &:nth-child(3n+1) div { background: $darkGreen; }
+    &:nth-child(3n+2) div { background: $orange;  }
+    &:nth-child(3n+3) div { background: $lightGreen;  }
+    //&:nth-child(4n+4) div { background: $blueGreen;  }
+
+    .track.title {
+      position: absolute;
+      left: 0; top: 0px;
+      opacity: 0;
+      font-size: .8em;
+      transition: opacity .5s ease-in-out;
+      -moz-transition: opacity .5s ease-in-out;
+      -webkit-transition: opacity .5s ease-in-out;
+
+      &:hover { opacity: 1; }
+
+      p { line-height: 35px; font-size: .8em; }
+
+      span { font-style: italic; font-size: .5em; display: block; line-height: 20px; max-width: 170px; margin: 0 auto; }
+    }
+  }
+
+  .track {
+    position: relative; float: left; display: table; width: 200px; height: 200px; border-radius: 50%; color: #fff; text-align: center; margin: 20px; cursor: hand;
+
+    p { display: table-cell; vertical-align: middle; border-radius: 50%; }
+  }
+}
