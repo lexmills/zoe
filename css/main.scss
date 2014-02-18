@@ -68,28 +68,34 @@ header {
 }
 
 /* Player */
-#player {
-  position: relative;
-  background: darkgray;
-  overflow: auto;
-  width: 200px;
-  border-radius: 5px;
-  margin: 35px auto 20px;
-  height: 47px;
+#player-container {
+  width: 100%; padding: 10px 0; background: $yellow; position: absolute;
 
-  .fa { position: absolute; color: #fff; font-size: 2em; top: 8px;
-    &#next { right: 20px; }
-    &#previous { left: 20px; }
-    &#play { left: 50%; margin-left: -9px; }
-    &#pause { @extend #play; }
+  &.fixed { position: fixed; top: 0; z-index: 1; }
+
+  #player {
+    position: relative;
+    background: darkgray;
+    overflow: auto;
+    width: 200px;
+    border-radius: 5px;
+    margin: 15px auto 15px;
+    height: 47px;
+
+    .fa { position: absolute; color: #fff; font-size: 2em; top: 8px;
+      &#next { right: 20px; }
+      &#previous { left: 20px; }
+      &#play { left: 50%; margin-left: -9px; }
+      &#pause { @extend #play; }
+    }
+
+    input[type=range] { width: 80%; float: right; }
   }
-
-  input[type=range] { width: 80%; float: right; }
 }
 
 /* Tracks */
 #tracks-container {
-  width: 90%; margin: 0 auto; font-size: 3em; max-width: 885px; padding: 0 0 20px 0; overflow: auto;
+  width: 90%; margin: 85px auto 0; font-size: 3em; max-width: 885px; padding: 0 0 20px 0; overflow: auto;
 
   .track-container { float: left; width: 220px; height: 220px; overflow: hidden; position: relative;
     &:nth-child(3n+1) div { background: $darkGreen; }

@@ -59,34 +59,43 @@ header {
         opacity: .5; }
 
 /* Player */
-#player {
-  position: relative;
-  background: darkgray;
-  overflow: auto;
-  width: 200px;
-  border-radius: 5px;
-  margin: 35px auto 20px;
-  height: 47px; }
-  #player .fa {
-    position: absolute;
-    color: #fff;
-    font-size: 2em;
-    top: 8px; }
-    #player .fa#next {
-      right: 20px; }
-    #player .fa#previous {
-      left: 20px; }
-    #player .fa#play, #player .fa#pause {
-      left: 50%;
-      margin-left: -9px; }
-  #player input[type=range] {
-    width: 80%;
-    float: right; }
+#player-container {
+  width: 100%;
+  padding: 10px 0;
+  background: #ffff9d;
+  position: absolute; }
+  #player-container.fixed {
+    position: fixed;
+    top: 0;
+    z-index: 1; }
+  #player-container #player {
+    position: relative;
+    background: darkgray;
+    overflow: auto;
+    width: 200px;
+    border-radius: 5px;
+    margin: 15px auto 15px;
+    height: 47px; }
+    #player-container #player .fa {
+      position: absolute;
+      color: #fff;
+      font-size: 2em;
+      top: 8px; }
+      #player-container #player .fa#next {
+        right: 20px; }
+      #player-container #player .fa#previous {
+        left: 20px; }
+      #player-container #player .fa#play, #player-container #player .fa#pause {
+        left: 50%;
+        margin-left: -9px; }
+    #player-container #player input[type=range] {
+      width: 80%;
+      float: right; }
 
 /* Tracks */
 #tracks-container {
   width: 90%;
-  margin: 0 auto;
+  margin: 85px auto 0;
   font-size: 3em;
   max-width: 885px;
   padding: 0 0 20px 0;

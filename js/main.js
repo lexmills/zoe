@@ -1,5 +1,16 @@
 $(document).ready(function() {
+  var position = 100;
+
+  //trigger first song to play - why isn't this working???
   $('#play').trigger('click');
+
+  $(window).scroll(function() {
+    if($(window).scrollTop() >= position ) {
+      $('#player-container').addClass('fixed');
+    } else {
+      $('#player-container').removeClass('fixed');
+    }
+  });
 
   playTrack();
   trackSelect();
@@ -7,6 +18,7 @@ $(document).ready(function() {
 
 var song;
 var track = 1;
+var tracks = $('.track.number').length;
 var seek = $('#seek');
 
 function playTrack() {
@@ -14,14 +26,14 @@ function playTrack() {
   duration = song.duration;
 
   $('#player').on('click', '.button', function(e) {
-
     if($(this).attr('id') == 'play') {
       playSong();
 
       //set song title
       updateTitle(track);
+      //play next song if song ends
+      detectEnd(track);
 
-      scrubber(song);
     }
     // pause button
     else if ($(this).attr('id') == 'pause') {
@@ -31,20 +43,28 @@ function playTrack() {
     //next button
     else if ($(this).attr('id') == 'next') {
       song.pause();
-      track++;
+
+      track == tracks ? track == 1 : track++;
+
       song = new Audio('songs/Track_' + track + '.mp3');
       //set song title
       updateTitle(track);
 
       playSong();
+      //play next song if song ends
+      detectEnd(track);
     } else {
       song.pause();
-      track--;
+
+      track == 1 ? track == tracks : track--;
+
       song = new Audio('songs/Track_' + track + '.mp3');
       //set song title
       updateTitle(track);
 
       playSong();
+      //play next song if song ends
+      detectEnd(track);
     }
 
     e.preventDefault();
@@ -59,11 +79,13 @@ function trackSelect() {
     //stop song if there is one playing
     song.pause();
     //update opacity for active song
-    updateTitle($(this));
+    updateTitle(track);
 
     song = new Audio('songs/Track_' + track + '.mp3');
     song.play();
     $('#play').replaceWith('<a class="button fa fa-pause" id="pause"></a>');
+
+    detectEnd(track);
   });
 }
 
@@ -78,6 +100,15 @@ function updateTitle(track) {
   var trackDiv = 'div[value="Track_' + track + '"]';
   $('.track.title').attr('style', '');
   $(trackDiv).children('.track.title').css('opacity', 1);
+}
+
+function detectEnd() {
+  song.addEventListener('ended', function() {
+    track++;
+    song = new Audio('songs/Track_' + track + '.mp3');
+    playSong(song);
+    updateTitle(track);
+  });
 }
 
 function scrubber(song) {
