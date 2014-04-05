@@ -1,8 +1,17 @@
 $(document).ready(function() {
   var position = 100;
+  var track = 1;
+  var tracks = $('.track.number').length;
 
-  //trigger first song to play - why isn't this working???
-  $('#play').trigger('click');
+  setTimeout(function() {
+    track = 1;
+    song = new Audio('songs/Track_' + track + '.mp3');
+
+    playSong();
+    //set song title
+    updateTitle(track);
+    detectEnd(track);
+  }, 300);
 
   $(window).scroll(function() {
     if($(window).scrollTop() >= position ) {
@@ -11,19 +20,6 @@ $(document).ready(function() {
       $('#player-container').removeClass('fixed');
     }
   });
-
-  playTrack();
-  trackSelect();
-});
-
-var song;
-var track = 1;
-var tracks = $('.track.number').length;
-var seek = $('#seek');
-
-function playTrack() {
-  song = new Audio('songs/Track_' + track + '.mp3');
-  duration = song.duration;
 
   $('#player').on('click', '.button', function(e) {
     if($(this).attr('id') == 'play') {
@@ -44,7 +40,7 @@ function playTrack() {
     else if ($(this).attr('id') == 'next') {
       song.pause();
 
-      track == tracks ? track == 1 : track++;
+      track == tracks ? track = 1 : track++;
 
       song = new Audio('songs/Track_' + track + '.mp3');
       //set song title
@@ -56,8 +52,7 @@ function playTrack() {
     } else {
       song.pause();
 
-      track == 1 ? track == tracks : track--;
-
+      track == 1 ? track = tracks : track--;
       song = new Audio('songs/Track_' + track + '.mp3');
       //set song title
       updateTitle(track);
@@ -68,11 +63,8 @@ function playTrack() {
     }
 
     e.preventDefault();
-
   });
-}
 
-function trackSelect() {
   $('.track-container').on('click', function() {
     var value = $(this).attr('value');
     track = value.match(/\d+$/)[0];
@@ -87,7 +79,7 @@ function trackSelect() {
 
     detectEnd(track);
   });
-}
+});
 
 function playSong() {
   //play song
@@ -102,7 +94,7 @@ function updateTitle(track) {
   $(trackDiv).children('.track.title').css('opacity', 1);
 }
 
-function detectEnd() {
+function detectEnd(track) {
   song.addEventListener('ended', function() {
     track++;
     song = new Audio('songs/Track_' + track + '.mp3');
